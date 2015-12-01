@@ -1,9 +1,10 @@
 import socket
 
+
 def main(dest_name):
     dest_addr = socket.gethostbyname(dest_name)
     port = 33434
-    maxNumHops = 32
+    max_hops = 30
     icmp = socket.getprotobyname('icmp')
     udp = socket.getprotobyname('udp')
     ttl = 1
@@ -29,14 +30,16 @@ def main(dest_name):
             recv_socket.close()
 
         if curr_addr is not None:
-            curr_host = "% s (%s)" % (curr_name, curr_addr)
+            curr_host = "%s (%s)" % (curr_name, curr_addr)
         else:
             curr_host = "*"
-        print ("%d\t%s" % (ttl, curr_host))
+        print
+        "%d\t%s" % (ttl, curr_host)
 
         ttl += 1
-        if(curr_addr == dest_addr or ttl > maxNumHops):
+        if curr_addr == dest_addr or ttl > max_hops:
             break
+
 
 if __name__ == "__main__":
     main('google.com')
