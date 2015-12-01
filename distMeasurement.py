@@ -33,8 +33,7 @@ def main(dest_name):
             curr_host = "%s (%s)" % (curr_name, curr_addr)
         else:
             curr_host = "*"
-        print
-        "%d\t%s" % (ttl, curr_host)
+        print ("%d\t%s" % (ttl, curr_host))
 
         ttl += 1
         if curr_addr == dest_addr or ttl > max_hops:
