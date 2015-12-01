@@ -12,7 +12,7 @@ def main(dest_name):
         send_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, udp)
         send_socket.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
         recv_socket.bind(("", port))
-        send_socket.sendto("".encode(), (dest_name, port))
+        send_socket.sendto("", (dest_name, port))
         curr_addr = None
         curr_name = None
         try:
@@ -35,7 +35,7 @@ def main(dest_name):
         print ("%d\t%s" % (ttl, curr_host))
 
         ttl += 1
-        if(curr_addr == dest_addr or ttl < maxNumHops):
+        if(curr_addr == dest_addr or ttl > maxNumHops):
             break
 
 if __name__ == "__main__":
