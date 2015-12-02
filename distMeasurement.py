@@ -44,9 +44,9 @@ def main(destinationame):
 
 
 if __name__ == "__main__":
-    #targetwebsites = open('targets.txt')
-    #for line in targetwebsites:
-    #    main('line')
-    #    print('Done with ' + line)
-    #print('Done with everything')
-    main('google.com')
+    targetwebsites = open('targets.txt')
+    for line in targetwebsites:
+        main('line')
+        print('Done with ' + line)
+    print('Done with everything')
+    #main('google.com')
