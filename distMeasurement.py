@@ -5,7 +5,7 @@ import socket
 def main(destinationame, retrynumber):
     #If it does not does not recive a response after 3 attempts, stop trying
     if retrynumber < 3:
-        print('Looking for ' + destinationame + '. Attempt' + str(retrynumber))
+        print('Looking for ' + destinationame + '. Attempt ' + str(retrynumber))
         #Gets ip address based off of name
         destinationaddress = socket.gethostbyname(destinationame)
         port = 33434
@@ -51,12 +51,10 @@ def main(destinationame, retrynumber):
                 timeoutcount += 1
             print("%d\t%s" % (ttl, currenthost))
 
-            if timeoutcount < 5:
+            if timeoutcount > 5:
                 #If not enough response retry from the beginning
+                print('Could not reach destination. Starting again.')
                 main(destinationame, retrynumber +1)
-                break
-            else:
-                print('Could not reach destination')
                 break
 
             ttl += 1
