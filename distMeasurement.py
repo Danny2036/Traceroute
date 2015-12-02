@@ -8,14 +8,16 @@ def main(destinationame):
     icmp = socket.getprotobyname('icmp')
     udp = socket.getprotobyname('udp')
     ttl = 1
+    timeoutlength = 5
     while True:
-        recevingsocket = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
-        sendingsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, udp)
-        sendingsocket.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
-        recevingsocket.bind(("", port))
-        sendingsocket.sendto("", (destinationame, port))
         currentaddress = None
         currentname = None
+        recevingsocket = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
+        recevingsocket.bind(("", port))
+        recevingsocket.settimeout(timeoutlength)
+        sendingsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, udp)
+        sendingsocket.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
+        sendingsocket.sendto("", (destinationame, port))
         try:
             _, currentaddress = recevingsocket.recvfrom(512)
             currentaddress = currentaddress[0]
@@ -41,7 +43,9 @@ def main(destinationame):
 
 
 if __name__ == "__main__":
-    targetwebsites = open('targets.txt')
-    for line in targetwebsites:
-        main('line')
-    print('Done')
+    #targetwebsites = open('targets.txt')
+    #for line in targetwebsites:
+    #    main('line')
+    #    print('Done with ' + line)
+    #print('Done with everything')
+    main('google.com')
