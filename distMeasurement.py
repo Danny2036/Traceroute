@@ -5,7 +5,6 @@ import time
 
 def main(destinationame, retrynumber):
     start = time.time()
-    ttl = 1
     #If it does not does not recive a response after 3 attempts, stop trying
     if retrynumber < 3:
         print('Looking for ' + destinationame + '. Attempt ' + str(retrynumber))
@@ -13,6 +12,7 @@ def main(destinationame, retrynumber):
         destinationaddress = socket.gethostbyname(destinationame)
         port = 33434
         maxnumhops = 128
+        ttl = 1
         icmp = socket.getprotobyname('icmp')
         udp = socket.getprotobyname('udp')
         timeoutlength = 1
@@ -56,18 +56,18 @@ def main(destinationame, retrynumber):
             if timeoutcount > 5:
                 #If not enough response retry from the beginning
                 print('Could not reach destination. Starting again.')
+                if retrynumber + 1 > 2:
+                    end = time.time()
+                    print('Timed out after '+ str(ttl) + ' hops in ' + str(end-start) + 'seconds')
                 main(destinationame, retrynumber +1)
                 break
 
             ttl += 1
             if currentaddress == destinationaddress or ttl > maxnumhops:
                 #If the destination is found or the number of hops has been exceeded then end
-                end = time.time()
-                print('The destination was reached in '+ str(ttl) + 'hops in ' + str(end-start) + 'seconds')
+                print('The destination was reached in '+ str(ttl) + ' hops in ' + str(end-start) + 'seconds')
                 break
     else:
-        end = time.time()
-        print('Timed out after '+ str(ttl) + 'hops in ' + str(end-start) + 'seconds')
         return
 
 
