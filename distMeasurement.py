@@ -65,6 +65,7 @@ def main(destinationame, retrynumber):
             ttl += 1
             if currentaddress == destinationaddress or ttl > maxnumhops:
                 #If the destination is found or the number of hops has been exceeded then end
+                end = time.time()
                 print('The destination was reached in '+ str(ttl) + ' hops in ' + str(end-start) + 'seconds')
                 break
     else:
