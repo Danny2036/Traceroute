@@ -41,5 +41,7 @@ def main(destinationName):
 
 
 if __name__ == "__main__":
-    main('google.com')
+    targetwebsites = open('targets.txt')
+    print(targetwebsites)
+    main('targets.txt')
     print('Done')
