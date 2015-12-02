@@ -1,8 +1,10 @@
 import socket
+import time
 #Referenced Ksplice blog tutorial on tracerouting
 #Referenced Silver moon raw socker programming in python
 
 def main(destinationame, retrynumber):
+    start = time.time()
     #If it does not does not recive a response after 3 attempts, stop trying
     if retrynumber < 3:
         print('Looking for ' + destinationame + '. Attempt ' + str(retrynumber))
@@ -60,6 +62,8 @@ def main(destinationame, retrynumber):
             ttl += 1
             if currentaddress == destinationaddress or ttl > maxnumhops:
                 #If the destination is found or the number of hops has been exceeded then end
+                end = time.time()
+                print('The destination was reached in '+ ttl + 'hops in ' + str(end-start) + 'seconds')
                 break
     else:
         return
