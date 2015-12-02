@@ -14,6 +14,7 @@ def main(destinationame, retrynumber):
         udp = socket.getprotobyname('udp')
         ttl = 1
         timeoutlength = 1
+        timeoutcount = 0
         while True:
             currentaddress = None
             currentname = None
@@ -40,7 +41,6 @@ def main(destinationame, retrynumber):
                 sendingsocket.close()
                 recevingsocket.close()
 
-            timeoutcount = 0
             if currentaddress is not None:
                 #If something is returned on the recieving socket
                 currenthost = "%s (%s)" % (currentname, currentaddress)
