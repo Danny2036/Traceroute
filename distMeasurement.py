@@ -57,7 +57,7 @@ def main(destinationame, retrynumber):
                 #If not enough response retry from the beginning
                 if retrynumber + 1 > 2:
                     end = time.time()
-                    print('Timed out after '+ str(ttl) + ' hops in ' + str(end-start) + 'seconds')
+                    print('Timed out after '+ str(ttl) + ' hops in ' + str(end-start-timeoutcount*timeoutlength) + 'seconds')
                 else:
                     main(destinationame, retrynumber +1)
                     print('Could not reach destination. Starting again.')
