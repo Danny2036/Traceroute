@@ -7,7 +7,7 @@ def main(destinationame, retrynumber):
     start = time.time()
     #If it does not does not recive a response after 3 attempts, stop trying
     if retrynumber < 3:
-        print('Looking for ' + destinationame + '. Attempt ' + str(retrynumber))
+        print('Looking for ' + destinationame + '. Attempt ' + str(retrynumber + 1))
         #Gets ip address based off of name
         destinationaddress = socket.gethostbyname(destinationame)
         port = 33434
@@ -55,11 +55,12 @@ def main(destinationame, retrynumber):
 
             if timeoutcount > 5:
                 #If not enough response retry from the beginning
-                print('Could not reach destination. Starting again.')
                 if retrynumber + 1 > 2:
                     end = time.time()
                     print('Timed out after '+ str(ttl) + ' hops in ' + str(end-start) + 'seconds')
-                main(destinationame, retrynumber +1)
+                else:
+                    main(destinationame, retrynumber +1)
+                    print('Could not reach destination. Starting again.')
                 break
 
             ttl += 1
