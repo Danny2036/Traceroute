@@ -2,13 +2,14 @@ import socket
 
 
 def main(destinationame):
+    print('Looking for ' + destinationame)
     destinationaddress = socket.gethostbyname(destinationame)
     port = 33434
     maxnumhops = 30
     icmp = socket.getprotobyname('icmp')
     udp = socket.getprotobyname('udp')
     ttl = 1
-    timeoutlength = 5
+    timeoutlength = 1
     while True:
         currentaddress = None
         currentname = None
@@ -34,7 +35,7 @@ def main(destinationame):
         if currentaddress is not None:
             currenthost = "%s (%s)" % (currentname, currentaddress)
         else:
-            currenthost = "*"
+            currenthost = "*Timed out"
         print("%d\t%s" % (ttl, currenthost))
 
         ttl += 1
