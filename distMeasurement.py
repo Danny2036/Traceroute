@@ -1,47 +1,47 @@
 import socket
 
 
-def main(destinationName):
-    destinationAddress = socket.gethostbyname(destinationName)
+def main(destinationame):
+    destinationaddress = socket.gethostbyname(destinationame)
     port = 33434
-    maxNumHops = 30
+    maxnumhops = 30
     icmp = socket.getprotobyname('icmp')
     udp = socket.getprotobyname('udp')
     ttl = 1
     while True:
-        receivingSocket = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
-        sendingSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, udp)
-        sendingSocket.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
-        receivingSocket.bind(("", port))
-        sendingSocket.sendto("", (destinationName, port))
-        currentAddress = None
-        currentName = None
+        recevingsocket = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
+        sendingsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, udp)
+        sendingsocket.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
+        recevingsocket.bind(("", port))
+        sendingsocket.sendto("", (destinationame, port))
+        currentaddress = None
+        currentname = None
         try:
-            _, currentAddress = receivingSocket.recvfrom(512)
-            currentAddress = currentAddress[0]
+            _, currentaddress = recevingsocket.recvfrom(512)
+            currentaddress = currentaddress[0]
             try:
-                currentName = socket.gethostbyaddr(currentAddress)[0]
+                currentname = socket.gethostbyaddr(currentaddress)[0]
             except socket.error:
-                currentName = currentAddress
+                currentname = currentaddress
         except socket.error:
             pass
         finally:
-            sendingSocket.close()
-            receivingSocket.close()
+            sendingsocket.close()
+            recevingsocket.close()
 
-        if currentAddress is not None:
-            currentHost = "%s (%s)" % (currentName, currentAddress)
+        if currentaddress is not None:
+            currenthost = "%s (%s)" % (currentname, currentaddress)
         else:
-            currentHost = "*"
-        print("%d\t%s" % (ttl, currentHost))
+            currenthost = "*"
+        print("%d\t%s" % (ttl, currenthost))
 
         ttl += 1
-        if currentAddress == destinationAddress or ttl > maxNumHops:
+        if currentaddress == destinationaddress or ttl > maxnumhops:
             break
 
 
 if __name__ == "__main__":
     targetwebsites = open('targets.txt')
-    print(targetwebsites)
-    main('targets.txt')
+    for line in targetwebsites:
+        main('line')
     print('Done')
