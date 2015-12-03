@@ -1,5 +1,5 @@
 import socket
-import http.client
+import urllib2
 
 if __name__ == "__main__":
     targetwebsites = open('targets.txt')
@@ -7,8 +7,7 @@ if __name__ == "__main__":
         #Remove carraige return
         website = line.strip()
         webaddres = socket.gethostbyname(website)
-        h = http.client.HTTPConnection('http://freegeoip.net/xml/' + str(webaddres), 80).connect()
-        response = h.getresponse()
+        response = urllib2.urlopen('http://freegeoip.net/xml/' + str(webaddres))
         for line2 in response:
             print(str(line2))
         print(h)
