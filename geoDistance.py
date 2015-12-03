@@ -44,4 +44,9 @@ def getlongandladpoints(address):
 if __name__ == "__main__":
     line = 'google.com'
     print(str(getdistance(line)))
+
     print('Done with everything')
+    targetwebsites = open('targets.txt')
+    for line in targetwebsites:
+        #Remove carraige return
+        print(line.strip() +' is ' + str(getdistance(line.strip())) + 'km away.')
