@@ -2,6 +2,7 @@ import socket
 import urllib2
 import re
 from math import radians, cos, sin, asin, sqrt
+#The longitude latidude caluclation came from stackoverflow this is the Haversine Formula
 
 def getdistance(website):
     #Gets starting IP

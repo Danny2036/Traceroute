@@ -11,3 +11,6 @@ How you will match ICMP responses with the probes you are sending out?
 	 will prevent an answer
 	-Some hosts have it set to drop a packet when probed as a security measure to prevent malcious people from 
 	 seeing parts of Networks and other services 
+
+The best fit lines on the graph did not really display useful information, that is due to general outliers in the 
+graphed.
