@@ -6,14 +6,16 @@ from math import radians, cos, sin, asin, sqrt
 
 def getdistance(website):
     #Gets starting IP
-    #homeaddress = socket.gethostbyname(socket.gethostname())
-    #homepoints = getlongandladpoints(homeaddress)
+    homeaddress = socket.gethostbyname(socket.gethostname())
+    homepoints = getlongandladpoints(homeaddress)
     #Remove carraige return
     website = line.strip()
     webaddress = socket.gethostbyname(website)
     destpoints = getlongandladpoints(webaddress)
-    return haversine(0,0, destpoints[0], destpoints[1])
+    #Returns the distance
+    return haversine(homepoints[0],homepoints[1], destpoints[0], destpoints[1])
 
+#Third party code
 def haversine(lon1, lat1, lon2, lat2):
     """
     Calculate the great circle distance between two points
@@ -35,12 +37,14 @@ def getlongandladpoints(address):
     #Get cordinates of home
     for line2 in response:
         xmlresponse.append(str(line2))
+    #Reads code out of the XML retrned from the website
     latitudetag = xmlresponse[10]
     longitudetag = xmlresponse[11]
     #Coordinates of this machine
     latitude = float(latitudetag[latitudetag.index('>') + 1 :latitudetag.index('<', 2)])
     longitude = float(longitudetag[longitudetag.index('>') + 1 :longitudetag.index('<', 2)])
     point = [longitude, latitude]
+    #Returns the points as a tuple
     return point
 
 if __name__ == "__main__":
