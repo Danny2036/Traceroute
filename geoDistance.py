@@ -45,8 +45,6 @@ def getlongandladpoints(address):
 
 if __name__ == "__main__":
     line = 'google.com'
-    print(str(getdistance(line)))
-
     targetwebsites = open('targets.txt')
     for line in targetwebsites:
         #Remove carraige return
