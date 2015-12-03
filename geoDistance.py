@@ -1,5 +1,6 @@
 import socket
 import urllib2
+import re
 from math import radians, cos, sin, asin, sqrt
 
 def getdistance(website):
@@ -36,7 +37,7 @@ def getlongandladpoints(address):
     latitudetag = xmlresponse[10]
     longitudetag = xmlresponse[11]
     #Coordinates of this machine
-    latitude = float(latitudetag[11:18])
+    latitude = float(latitudetag[latitudetag.index('>') + 1 :longitudetag.index('<', 2)])
     longitude = float(longitudetag[12:21])
     point = [longitude, latitude]
     return point
