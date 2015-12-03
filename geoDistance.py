@@ -4,13 +4,13 @@ from math import radians, cos, sin, asin, sqrt
 
 def getdistance(website):
     #Gets starting IP
-    homeaddress = socket.getprotobyname(socket.gethostname())
-    homepoints = getlongandladpoints(homeaddress)
+    #homeaddress = socket.gethostbyname(socket.gethostname())
+    #homepoints = getlongandladpoints(homeaddress)
     #Remove carraige return
     website = line.strip()
     webaddress = socket.gethostbyname(website)
     destpoints = getlongandladpoints(webaddress)
-    return haversine(homepoints[0], homepoints[1], destpoints[0], destpoints[1])
+    return haversine(0,0, destpoints[0], destpoints[1])
 
 def haversine(lon1, lat1, lon2, lat2):
     """
@@ -31,14 +31,15 @@ def getlongandladpoints(address):
     response = urllib2.urlopen('http://freegeoip.net/xml/' + str(address))
     xmlresponse = []
     #Get cordinates of home
-    for line2 in homeresponse:
+    for line2 in response:
         xmlresponse.append(str(line2))
     latitudetag = xmlresponse[10]
     longitudetag = xmlresponse[11]
     #Coordinates of this machine
-    latitude = float(latitudetag[10:17])
+    latitude = float(latitudetag[11:17])
     longitude = float(longitudetag[10:17])
-    return point[longitude, latitude]
+    point = [longitude, latitude]
+    return point
 
 if __name__ == "__main__":
     line = 'google.com'
