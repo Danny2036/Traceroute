@@ -37,8 +37,8 @@ def getlongandladpoints(address):
     latitudetag = xmlresponse[10]
     longitudetag = xmlresponse[11]
     #Coordinates of this machine
-    latitude = float(latitudetag[latitudetag.index('>') + 1 :longitudetag.index('<', 2)])
-    longitude = float(longitudetag[12:21])
+    latitude = float(latitudetag[latitudetag.index('>') + 1 :latitudetag.index('<', 2)])
+    longitude = float(longitudetag[longitudetag.index('>') + 1 :longitudetag.index('<', 2)])
     point = [longitude, latitude]
     return point
 
