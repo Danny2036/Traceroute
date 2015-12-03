@@ -1,0 +1,13 @@
+Explain the technique you use to measure the hop distance from your machine to destination using a single probe.
+	-The hop distance is done by counting each router that is visitied that is not the destination. So in my code
+	 every time I visit a router, I increment the TTL by one
+
+How you will match ICMP responses with the probes you are sending out?
+	-You can send an ICMP echo request out, then listen for the response. If there is a response then it can get
+	 marked, but if there is no response then that means that it was unsuccessful and would be marked failed.
+
+(list all possible reasons you can think of for not getting the answer when probing an arbitrary host)
+	-If a packets get lost in transit or there is an issue with connection the prevents conacting a host then that
+	 will prevent an answer
+	-Some hosts have it set to drop a packet when probed as a security measure to prevent malcious people from 
+	 seeing parts of Networks and other services 
